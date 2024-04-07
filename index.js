@@ -1,4 +1,4 @@
-console.log('✅ Iniciando...')
+console.log('Iniciando')
 
 import { join, dirname } from 'path'
 import { createRequire } from 'module';
@@ -24,19 +24,19 @@ const rl = createInterface(process.stdin, process.stdout)
 const app = express()
 const port = process.env.PORT || 8080;
 
-say('Senna FG98', {
+say('ONYX', {
   font: 'pallet',
   align: 'center',
   gradient: ['red', 'magenta']
 })
-say(`senna-bot By FG98 Ig: @fg98_ff`, {
+say(`ONYX BY KENN`, {
   font: 'console',
   align: 'center',
   gradient: ['cyan', 'magenta']
 })
 
 app.listen(port, () => {
-  console.log(chalk.green(`🌐 Puerto ${port} esta abierto`));
+  console.log(chalk.green(`Puerto ${port} esta abierto`));
 });
 
 var isRunning = false
@@ -82,13 +82,6 @@ async function start(file) {
     })
   })
 
-  //---
-  console.log(chalk.yellow(`🖥️ ${os.type()}, ${os.release()} - ${os.arch()}`));
-  const ramInGB = os.totalmem() / (1024 * 1024 * 1024);
-  console.log(chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`));
-  const freeRamInGB = os.freemem() / (1024 * 1024 * 1024);
-  console.log(chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`));
-  console.log(chalk.yellow(`📃 Script by FG98`));
 
   const packageJsonPath = path.join(path.dirname(currentFilePath), './package.json');
     try {
