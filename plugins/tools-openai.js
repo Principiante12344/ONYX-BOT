@@ -1,26 +1,23 @@
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 
-var handler = async (m, { text,  usedPrefix, command }) => {
+let handler = async (m, { text }) => {
+    if (!text) throw '🎌 *Ingresa una solicitud*\n\nEjemplo: !bard ¿Conoces CuriosityBot-MD?';
 
-if (!text) return conn.reply(m.chat, `🎌 *Ingresé una petición*\n\nEjemplo, !bard Conoces CuriosityBot-MD?`, m, fake, )
+    try {
+        await m.reply('*🔄 Procesando...*');
+        const response = await fetch(`https://aemt.me/bard?text=${encodeURIComponent(text)}`);
+        const result = await response.json();
 
-try {
+        m.reply(result.result);
+    } catch (error) {
+        console.error(error);
+        throw '*🚩 Ocurrió un error*';
+    }
+};
 
-conn.sendPresenceUpdate('composing', m.chat)
-var apii = await fetch(`https://aemt.me/bard?text=${text}`)
-var res = await apii.json()
-await m.reply(res.result)
+handler.command = ['bard'];
+handler.help = ['bard'];
+handler.tags = ['ai'];
+handler.premium = false;
 
-} catch (error) {
-console.error(error)
-return conn.reply(m.chat, `*🚩 Ocurrió un fallo*`, m, fake, )
-}
-
-}
-handler.command = ['bard']
-handler.help = ['bard']
-handler.tags = ['ai']
-
-handler.premium = false
-
-export default handler
+export default handler;
