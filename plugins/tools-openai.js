@@ -1,22 +1,26 @@
+import fetch from 'node-fetch'
 
-import cheerio from 'cheerio';
-import fetch from 'node-fetch';
-let handler = async (m, { conn, text }) => {
-	
-if (!text) throw `✳️ ${mssg.notext}`;
-m.react('💬')
+var handler = async (m, { text,  usedPrefix, command }) => {
 
-	try {
-		let gpt = await fetch(global.API('fgmods', '/api/info/openai2', { text }, 'apikey'));
-        let res = await gpt.json()
-        await m.reply(res.result)
-	} catch {
-		m.reply(`❎ Error: intenta más tarde`);
-	}
+if (!text) return conn.reply(m.chat, `🎌 *Ingresé una petición*\n\nEjemplo, !bard Conoces CuriosityBot-MD?`, m, fake, )
+
+try {
+
+conn.sendPresenceUpdate('composing', m.chat)
+var apii = await fetch(`https://aemt.me/bard?text=${text}`)
+var res = await apii.json()
+await m.reply(res.result)
+
+} catch (error) {
+console.error(error)
+return conn.reply(m.chat, `*🚩 Ocurrió un fallo*`, m, fake, )
+}
 
 }
-handler.help = ['ai <text>']; 
-handler.tags = ['tools'];
-handler.command = ['ia', 'ai', 'chatgpt', 'openai', 'gpt'];
+handler.command = ['bard']
+handler.help = ['bard']
+handler.tags = ['ai']
 
-export default handler;
+handler.premium = false
+
+export default handler
