@@ -1,4 +1,3 @@
-
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 import './config.js'; 
 import { createRequire } from "module"; // Bring in the ability to create the 'require' method
@@ -51,7 +50,7 @@ global.timestamp = {
 const __dirname = global.__dirname(import.meta.url)
 
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
-global.prefix = new RegExp('^[' + (opts['prefix'] || '‎z/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.,\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
+global.prefix = new RegExp('^[' + (opts['prefix'] || '‎#').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
 
 //global.opts['db'] = "mongodb+srv://dbdyluxbot:password@cluster0.xwbxda5.mongodb.net/?retryWrites=true&w=majority"
 
@@ -106,11 +105,11 @@ const question = (texto) => new Promise((resolver) => rl.question(texto, resolve
 let opcion
 if (!fs.existsSync(`./${authFile}/creds.json`) && !methodCodeQR && !methodCode) {
 while (true) {
-opcion = await question("\n\n✳️ Ingrese el metodo de conexion\n🔺 1 : por QR\n🔺 2 : por CÓDIGO\n\n\n")
+opcion = await question("\n\n Ingrese el metodo de conexion\n• 1 : por QR\n• 2 : por CÓDIGO\n\n\n")
 if (opcion === '1' || opcion === '2') {
 break
 } else {
-console.log("\n\n🔴 Ingrese solo una opción \n\n 1 o 2\n\n" )
+console.log("\n\nIngrese solo una opción \n\n 1 o 2\n\n" )
 }}
 opcion = opcion
 }
@@ -153,13 +152,13 @@ if (opcion === '2' || methodCode) {
   process.exit(0)
   }} else {
   while (true) {
-  addNumber = await question(chalk.bgBlack(chalk.bold.greenBright("\n\n✳️ Escriba su numero\n\nEjemplo: 5491168xxxx\n\n\n\n")))
+  addNumber = await question(chalk.bgBlack(chalk.bold.greenBright("\n\n✳️ Escriba su numero\n\nEjemplo: 5190122812\n\n\n\n")))
   addNumber = addNumber.replace(/[^0-9]/g, '')
   
   if (addNumber.match(/^\d+$/) && Object.keys(PHONENUMBER_MCC).some(v => addNumber.startsWith(v))) {
   break 
   } else {
-  console.log(chalk.bgBlack(chalk.bold.redBright("\n\n✴️ Asegúrese de agregar el código de país")))
+  console.log(chalk.bgBlack(chalk.bold.redBright("\n\nAsegúrese de agregar el código de país")))
   }}
  
   }
@@ -167,7 +166,7 @@ if (opcion === '2' || methodCode) {
   setTimeout(async () => {
   let codeBot = await conn.requestPairingCode(addNumber)
   codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-  console.log(chalk.bold.red(`\n\n🟢   Su Código es:  ${codeBot}\n\n`)) 
+  console.log(chalk.bold.red(`\n\n   Su Código es:  ${codeBot}\n\n`)) 
   rl.close()
   }, 3000)
   }}
@@ -352,11 +351,11 @@ async function _quickTest() {
   // require('./lib/sticker').support = s
   Object.freeze(global.support)
 
-  if (!s.ffmpeg) conn.logger.warn('Please install ffmpeg for sending videos (pkg install ffmpeg)')
-  if (s.ffmpeg && !s.ffmpegWebp) conn.logger.warn('Stickers may not animated without libwebp on ffmpeg (--enable-ibwebp while compiling ffmpeg)')
-  if (!s.convert && !s.magick && !s.gm) conn.logger.warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
+  if (!s.ffmpeg) conn.logger.warn('')
+  if (s.ffmpeg && !s.ffmpegWebp) conn.logger.warn('')
+  if (!s.convert && !s.magick && !s.gm) conn.logger.warn('')
 }
 
 _quickTest()
-  .then(() => conn.logger.info('✅ Prueba rápida realizado!'))
+  .then(() => conn.logger.info(''))
   .catch(console.error)
