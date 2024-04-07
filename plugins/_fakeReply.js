@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 export async function before(m, { conn }) {
-   let pp = await this.profilePictureUrl(m.sender, 'image').catch(_ => 'https://i.ibb.co/1ZxrXKJ/avatar-contact.jpg');
+   let pp = await this.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/5e10f68fb0c2801a2612d.jpg');
 
   // Respuesta con enlace de WhatsApp
   global.rpl = {
@@ -80,4 +80,4 @@ export async function before(m, { conn }) {
   
   
   
-}
+         }
