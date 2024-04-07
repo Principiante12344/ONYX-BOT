@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch';
 export async function before(m, { conn }) {
    let pp = await this.profilePictureUrl(m.sender, 'image').catch(_ => 'https://i.ibb.co/1ZxrXKJ/avatar-contact.jpg');
@@ -9,9 +8,9 @@ export async function before(m, { conn }) {
       externalAdReply: {
         mediaUrl: bgp,
         mediaType: 'VIDEO',
-        description: 'support group',
+        description: '',
         title: packname,
-        body: 'grupo de soporte',
+        body: '',
         thumbnailUrl: pp,
         sourceUrl: bgp
       }
@@ -24,9 +23,9 @@ export async function before(m, { conn }) {
       externalAdReply: {
         mediaUrl: fgcanal,
         mediaType: 'VIDEO',
-        description: 'canal del grupo',
+        description: '',
         title: packname,
-        body: 'Canal de FG98',
+        body: '',
         thumbnailUrl: pp,
         sourceUrl: fgcanal
       }
@@ -40,8 +39,8 @@ export async function before(m, { conn }) {
         mediaUrl: fgpyp,
         mediaType: 'VIDEO',
         description: 'Donate',
-        title: 'PayPal',
-        body: 'ayuda a mantener el bot activo',
+        title: '',
+        body: '',
         thumbnailUrl: pp,
         sourceUrl: fgpyp
       }
@@ -54,9 +53,9 @@ export async function before(m, { conn }) {
       externalAdReply: {
         mediaUrl: fgig,
         mediaType: 'VIDEO',
-        description: 'Sigueme por Instagram',
-        title: 'Instagram',
-        body: 'sigueme por Instagram',
+        description: '',
+        title: '',
+        body: '',
         thumbnailUrl: pp,
         sourceUrl: fgig
       }
@@ -71,8 +70,8 @@ export async function before(m, { conn }) {
         mediaUrl: fgyt,
         mediaType: 'VIDEO',
         description: 'Suscribete: ' + fgyt,
-        title: 'FG YouTube',
-        body: 'aprende a crear tus propios bots',
+        title: '',
+        body: '',
         thumbnailUrl: pp,
         sourceUrl: fgyt
       }
