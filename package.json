@@ -1,7 +1,7 @@
 { 
-    "name": "senna-bot",
+    "name": "onyx-bot",
     "version": "3.0.0",
-    "description": "Customizable WhatsApp Bot",
+    "description": "WhatsApp Bot",
     "main": "index.js",
     "type": "module",
     "directories": {
@@ -26,16 +26,16 @@
         "senna-bot",
         "baileys-md"
     ],
-    "homepage": "https://github.com/FG98F/senna-bot",
+    "homepage": "https://github.com/Principiante12344/ONYX-BOT",
     "author": {
-        "name": "FG98"
+        "name": "KENN"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/FG98F/senna-bot.git"
+        "url": "git+https://github.com/Principiante12344/ONYX-BOT.git"
     },
     "bugs": {
-        "url": "https://github.com/FG98F/senna-bot/issues"
+        "url": ""
     },
     "license": "GPL-3.0-or-later",
     "dependencies": {
