@@ -501,8 +501,8 @@ export async function participantsUpdate({ id, participants, action }) {
             if (chat.welcome) {
                 let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
                 for (let user of participants) {
-                    let pp = 'https://i.ibb.co/1ZxrXKJ/avatar-contact.jpg'
-                    let ppgp = 'https://i.ibb.co/1ZxrXKJ/avatar-contact.jpg'
+                    let pp = ''
+                    let ppgp = ''
                     try {
                         pp = await this.profilePictureUrl(user, 'image')
                         ppgp = await this.profilePictureUrl(id, 'image')
@@ -510,22 +510,22 @@ export async function participantsUpdate({ id, participants, action }) {
                         text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Bienvenido, @user').replace('@group', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'Desconocido') :
                             (chat.sBye || this.bye || conn.bye || 'Adiós, @user')).replace('@user', '@' + user.split('@')[0])
                          
-                            let wel = API('fgmods', '/api/welcome', {
+                            let wel = API('', {
                                 username: await this.getName(user),
                                 groupname: await this.getName(id),
                                 groupicon: ppgp,
                                 membercount: groupMetadata.participants.length,
                                 profile: pp,
-                                background: 'https://i.ibb.co/74Y8XpS/akali.jpg'
+                                background: ''
                             }, 'apikey')
 
-                            let lea = API('fgmods', '/api/goodbye2', {
+                            let lea = API('', {
                                 username: await this.getName(user),
                                 groupname: await this.getName(id),
                                 groupicon: ppgp,
                                 membercount: groupMetadata.participants.length,
                                 profile: pp,
-                                background: 'https://i.ibb.co/Lkg2TnN/gwe.jpg'
+                                background: ''
                             }, 'apikey')
 
                             this.sendFile(id, action === 'add' ? wel : lea, 'pp.jpg', text, null, false, { mentions: [user] })
@@ -541,7 +541,7 @@ export async function participantsUpdate({ id, participants, action }) {
         case 'promote':
             text = (chat.sPromote || this.spromote || conn.spromote || '@user ahora es administrador')
         case 'demote':
-            let pp = await this.profilePictureUrl(participants[0], 'image').catch(_ => 'https://i.ibb.co/1ZxrXKJ/avatar-contact.jpg') 
+            let pp = await this.profilePictureUrl(participants[0], 'image').catch(_ => '') 
             if (!text)
                 text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ya no es administrador')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
@@ -584,15 +584,7 @@ export async function deleteUpdate(message) {
         let chat = global.db.data.chats[msg.chat] || {}
         if (chat.delete)
             return
-        await this.reply(msg.chat, `
-≡ Borró un mensaje  
-┌─⊷  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀 
-▢ *Nombre :* @${participant.split`@`[0]} 
-└─────────────
-Para desactivar esta función, escriba 
-*/off antidelete*
-*.enable delete*
-`.trim(), msg, {
+        await this.reply(msg.chat, ``.trim(), msg, {
             mentions: [participant]
         })
         this.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
