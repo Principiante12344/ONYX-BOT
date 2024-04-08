@@ -1,38 +1,28 @@
+import fetch from 'node-fetch';
 
-import { translate } from '@vitalets/google-translate-api'
-const defaultLang = 'es'
-const tld = 'cn'
+const handler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) throw `*🚫 𝐄𝐑𝐑𝐎𝐑 🚫*\n\ᥙs᥆ ძᥱᥣ ᥴ᥆mᥲᥒძ᥆ ᥴ᥆rrᥱᥴ𝗍᥆:\n\n${usedPrefix + command} edits de mia kalifa`;;
+  const res = await fetch(`https://aemt.me/tiktoksearch?text=${text}`);        
+  const data = await res.json();
+  const json = data.result.data[0];
+  await conn.sendFile(m.chat, json.play, 'tiktok.mp4', `
+*T I K T O K  - S E A R C H*
 
-let handler = async (m, { args, usedPrefix, command }) => {
-    let err = `
-📌 *${mssg.example} :*
+*Titulo 📋:* ${json.title}
+`, m);
+  await conn.sendFile(m.chat, json.music, 'error.mp3', null, m, true);
+};
 
-*${usedPrefix + command}* <idioma> [texto]
-*${usedPrefix + command}* es Hello World
+handler.help = ['tiktoksearch'];
+handler.command = /^(tiktoksearch|ttsearch|tiktoks|ttsr)$/i;
+handler.tags = ['downloader'];
+handler.limit = true;
+handler.group = false;
+handler.premium = false;
+handler.owner = false;
+handler.admin = false;
+handler.botAdmin = false;
+handler.fail = null;
+handler.private = false;
 
-≡ *${mssg.tradList}:* 
-
-https://cloud.google.com/translate/docs/languages
-`.trim()
-
-    let lang = args[0]
-    let text = args.slice(1).join(' ')
-    if ((args[0] || '').length !== 2) {
-        lang = defaultLang
-        text = args.join(' ')
-    }
-    if (!text && m.quoted && m.quoted.text) text = m.quoted.text
-
-    try {
-       let result = await translate(text, { to: lang, autoCorrect: true }).catch(_ => null) 
-       m.reply(result.text)
-    } catch (e) {
-        throw err
-    } 
-
-}
-handler.help = ['trad <leng> <text>']
-handler.tags = ['tools']
-handler.command = ['translate', 'tl', 'trad', 'tr', 'traducir']
-
-export default handler
+export default handler;
